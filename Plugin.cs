@@ -17,7 +17,7 @@ namespace KillForXP
         protected override void Load()
         {
             Rocket.Core.Logging.Logger.Log("Kill for XP loaded successfully\n(I hope)");
-            UnturnedPlayer.Events += ev_OnPlayerDeath;
+            UnturnedPlayerEvents += ev_OnPlayerDeath;
         }
         protected override void Unload()
         {

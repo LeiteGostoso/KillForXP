@@ -16,13 +16,13 @@ namespace KillForXP
 
         protected override void Load()
         {
-            Rocket.Core.Logging.Logger.Log("XP For Kill loaded successfully.");
+            Rocket.Core.Logging.Logger.Log("Kill for XP loaded successfully\n(I hope)");
+            UnturnedPlayerEvents ev = new UnturnedPlayerEvents();
+            ev.OnDeath += ev_OnDeath;
         }
 
         public void FixedUpdate()
         {
-            UnturnedPlayerEvents ev = new UnturnedPlayerEvents();
-            ev.OnDeath += ev_OnDeath;
         }
         public static Plugin Instance;
         void ev_OnDeath(UnturnedPlayer player, SDG.Unturned.EDeathCause cause, SDG.Unturned.ELimb limb, Steamworks.CSteamID murderer)
@@ -60,7 +60,7 @@ namespace KillForXP
             }
             catch
             {
-                Rocket.Core.Logging.Logger.Log("WRONG COLOR SYNTAX IN XP FOR KILL PLUGIN");
+                Rocket.Core.Logging.Logger.Log("WRONG COLOR SYNTAX FOR CONSOLE IN CONFIGURATIONS");
                 Rocket.Core.Logging.Logger.Log(Translate("msg_consolemsg"), ConsoleColor.Red);
             }
         }

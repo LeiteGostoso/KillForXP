@@ -51,7 +51,7 @@ namespace KillForXP
             else return;
         }
 
-        public static void GiveXP(uint amount, UnturnedPlayer player, UnturnedPlayer killed, string limbName)
+        public void GiveXP(uint amount, UnturnedPlayer player, UnturnedPlayer killed, string limbName)
         {
             player.Experience += amount;
             Color c = new Color();

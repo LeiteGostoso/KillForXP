@@ -17,33 +17,41 @@ namespace KillForXP
         protected override void Load()
         {
             Rocket.Core.Logging.Logger.Log("Kill for XP loaded successfully\n(I hope)");
-            UnturnedPlayerEvents.OnDeath += ev_OnPlayerDeath;
+            UnturnedPlayerEvents.OnPlayerDeath += ev_OnPlayerDeath;
+        }
+        protected override void Unload()
+        {
+            Rocket.Core.Logging.Logger.Log("Kill for XP unloaded successfully\n(I hope)");
+            UnturnedPlayerEvents.OnPlayerDeath -= ev_OnPlayerDeath;
         }
 
         public void FixedUpdate()
         {
         }
+        
         public static Plugin Instance;
-        void ev_OnPlayerDeath(UnturnedPlayer player, SDG.Unturned.EDeathCause cause, SDG.Unturned.ELimb limb, Steamworks.CSteamID murderer)
+        
+        public static void ev_OnPlayerDeath(UnturnedPlayer player, SDG.Unturned.EDeathCause cause, SDG.Unturned.ELimb limb, Steamworks.CSteamID murderer)
         {
             UnturnedPlayer killer = UnturnedPlayer.FromCSteamID(murderer);
             if (limb == ELimb.SKULL)
                 GiveXP(Instance.Configuration.Instance.Skull_XP, killer, player, Translate("skull_name"));
-            if (limb == ELimb.LEFT_ARM || limb == ELimb.RIGHT_ARM)
+            else if (limb == ELimb.LEFT_ARM || limb == ELimb.RIGHT_ARM)
                 GiveXP(Instance.Configuration.Instance.Arm_XP, killer, player, Translate("arm_name"));
-            if (limb == ELimb.LEFT_FOOT || limb == ELimb.RIGHT_FOOT)
+            else if (limb == ELimb.LEFT_FOOT || limb == ELimb.RIGHT_FOOT)
                 GiveXP(Instance.Configuration.Instance.Foot_XP, killer, player, Translate("foot_name"));
-            if (limb == ELimb.RIGHT_FRONT || limb == ELimb.LEFT_FRONT)
+            else if (limb == ELimb.RIGHT_FRONT || limb == ELimb.LEFT_FRONT)
                 GiveXP(Instance.Configuration.Instance.Front_XP, killer, player, Translate("front_name"));
-            if (limb == ELimb.SPINE)
+            else if (limb == ELimb.SPINE)
                 GiveXP(Instance.Configuration.Instance.Spine_XP, killer, player, Translate("spine_name"));
-            if (limb == ELimb.LEFT_LEG || limb == ELimb.RIGHT_LEG)
+            else if (limb == ELimb.LEFT_LEG || limb == ELimb.RIGHT_LEG)
                 GiveXP(Instance.Configuration.Instance.Leg_XP, killer, player, Translate("leg_name"));
-            if (limb == ELimb.LEFT_BACK || limb == ELimb.RIGHT_BACK)
+            else if (limb == ELimb.LEFT_BACK || limb == ELimb.RIGHT_BACK)
                 GiveXP(Instance.Configuration.Instance.Back_XP, killer, player, Translate("back_name"));
+            else return;
         }
 
-        void GiveXP(uint amount, UnturnedPlayer player, UnturnedPlayer killed, string limbName)
+        public static void GiveXP(uint amount, UnturnedPlayer player, UnturnedPlayer killed, string limbName)
         {
             player.Experience += amount;
             Color c = new Color();

@@ -17,15 +17,14 @@ namespace KillForXP
         protected override void Load()
         {
             Rocket.Core.Logging.Logger.Log("Kill for XP loaded successfully\n(I hope)");
-            UnturnedPlayerEvents ev = new UnturnedPlayerEvents();
-            ev.OnDeath += ev_OnDeath;
+            UnturnedPlayerEvents.OnPlayerDeath += ev_OnPlayerDeath;
         }
 
         public void FixedUpdate()
         {
         }
         public static Plugin Instance;
-        void ev_OnDeath(UnturnedPlayer player, SDG.Unturned.EDeathCause cause, SDG.Unturned.ELimb limb, Steamworks.CSteamID murderer)
+        void ev_OnPlayerDeath(UnturnedPlayer player, SDG.Unturned.EDeathCause cause, SDG.Unturned.ELimb limb, Steamworks.CSteamID murderer)
         {
             UnturnedPlayer killer = UnturnedPlayer.FromCSteamID(murderer);
             if (limb == ELimb.SKULL)

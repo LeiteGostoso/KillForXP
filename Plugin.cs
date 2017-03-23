@@ -29,9 +29,9 @@ namespace KillForXP
         {
         }
         
-        public static Plugin Instance;
+        public Plugin Instance;
         
-        public static void ev_OnPlayerDeath(UnturnedPlayer player, SDG.Unturned.EDeathCause cause, SDG.Unturned.ELimb limb, Steamworks.CSteamID murderer)
+        public void ev_OnPlayerDeath(UnturnedPlayer player, SDG.Unturned.EDeathCause cause, SDG.Unturned.ELimb limb, Steamworks.CSteamID murderer)
         {
             UnturnedPlayer killer = UnturnedPlayer.FromCSteamID(murderer);
             if (limb == ELimb.SKULL)
